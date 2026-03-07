@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>姫野 — 設定資料</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Noto+Serif+JP:wght@200;300;400&display=swap');
+
+  :root {
+    --bg: #0a0a0a;
+    --surface: #111111;
+    --border: #222222;
+    --text: #c8c0b8;
+    --text-dim: #5a5550;
+    --red: #8b1a1a;
+    --red-light: #c0392b;
+    --gold: #6b5c3e;
+    --gold-light: #a08a60;
+    --white: #e8e0d8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 200;
+    line-height: 1.9;
+    min-height: 100vh;
+  }
+
+  /* grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* header */
+  header {
+    padding: 5rem 0 3rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 4rem;
+  }
+
+  .label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    color: var(--text-dim);
+    font-style: italic;
+  }
+
+  /* opening quote */
+  .opening {
+    padding: 3rem 0;
+    border-left: 1px solid var(--red);
+    padding-left: 2rem;
+    margin-bottom: 4rem;
+  }
+
+  .opening p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--white);
+    line-height: 2;
+    font-weight: 300;
+  }
+
+  .opening .speaker {
+    margin-top: 1rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: var(--text-dim);
+  }
+
+  /* identity block */
+  .identity {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--border);
+    margin-bottom: 4rem;
+  }
+
+  .identity-item {
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .identity-item:nth-child(odd) {
+    border-right: 1px solid var(--border);
+  }
+
+  .identity-item:nth-last-child(-n+2) {
+    border-bottom: none;
+  }
+
+  .identity-key {
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+
+  .identity-val {
+    font-size: 0.9rem;
+    color: var(--white);
+    font-weight: 300;
+  }
+
+  .identity-val.redacted {
+    color: var(--text-dim);
+    font-style: italic;
+  }
+
+  /* sections */
+  section {
+    margin-bottom: 4rem;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.7rem;
+    color: var(--red-light);
+    letter-spacing: 0.2em;
+  }
+
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: var(--white);
+  }
+
+  p {
+    font-size: 0.88rem;
+    line-height: 2;
+    color: var(--text);
+    margin-bottom: 1.2rem;
+  }
+
+  p:last-child { margin-bottom: 0; }
+
+  /* keyword highlight */
+  .key {
+    color: var(--white);
+    font-weight: 300;
+  }
+
+  /* appearance */
+  .appearance-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    margin-top: 1.5rem;
+  }
+
+  .appearance-item {
+    background: var(--bg);
+    padding: 1.2rem 1.5rem;
+  }
+
+  .appearance-tag {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+
+  .appearance-desc {
+    font-size: 0.85rem;
+    color: var(--text);
+  }
+
+  /* timeline */
+  .timeline {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    bottom: 0.5rem;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--red), transparent);
+  }
+
+  .timeline-item {
+    position: relative;
+    padding: 0 0 2rem 1.5rem;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -0.25rem;
+    top: 0.5rem;
+    width: 5px;
+    height: 5px;
+    background: var(--red);
+    border-radius: 50%;
+  }
+
+  .timeline-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--red-light);
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+
+  .timeline-text {
+    font-size: 0.85rem;
+    color: var(--text);
+    line-height: 1.8;
+  }
+
+  .timeline-text .unknown {
+    color: var(--text-dim);
+    font-style: italic;
+  }
+
+  /* note block */
+  .note {
+    background: var(--surface);
+    border-left: 2px solid var(--gold);
+    padding: 1.5rem 2rem;
+    margin-top: 2rem;
+  }
+
+  .note p {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    margin: 0;
+    font-style: italic;
+  }
+
+  /* concept block */
+  .concept {
+    background: var(--surface);
+    padding: 2.5rem;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .concept::before {
+    content: '"';
+    position: absolute;
+    top: -1rem;
+    right: 1rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 8rem;
+    color: var(--border);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .concept p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-style: italic;
+    line-height: 2;
+    color: var(--white);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* mode block */
+  .mode-trigger {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--border);
+    margin: 1.5rem 0;
+  }
+
+  .mode-item {
+    background: var(--bg);
+    padding: 1rem 1.5rem;
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    letter-spacing: 0.05em;
+  }
+
+  .mode-item::before {
+    content: '—  ';
+    color: var(--red);
+  }
+
+  /* participation section */
+  .participation {
+    border: 1px solid var(--border);
+    padding: 2.5rem;
+    margin-top: 4rem;
+  }
+
+  .participation h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--white);
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+  }
+
+  .participation p {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+  }
+
+  /* footer */
+  footer {
+    padding: 4rem 0;
+    border-top: 1px solid var(--border);
+    margin-top: 5rem;
+  }
+
+  footer p {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    letter-spacing: 0.15em;
+  }
+
+  /* fade in */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .container > * {
+    animation: fadeUp 0.8s ease both;
+  }
+
+  header { animation-delay: 0s; }
+  .opening { animation-delay: 0.15s; }
+  .identity { animation-delay: 0.25s; }
+  section:nth-of-type(1) { animation-delay: 0.3s; }
+  section:nth-of-type(2) { animation-delay: 0.35s; }
+  section:nth-of-type(3) { animation-delay: 0.4s; }
+  section:nth-of-type(4) { animation-delay: 0.45s; }
+  section:nth-of-type(5) { animation-delay: 0.5s; }
+
+  @media (max-width: 600px) {
+    .identity { grid-template-columns: 1fr; }
+    .identity-item:nth-child(odd) { border-right: none; }
+    .identity-item:nth-last-child(-n+2) { border-bottom: 1px solid var(--border); }
+    .identity-item:last-child { border-bottom: none; }
+    .appearance-grid { grid-template-columns: 1fr; }
+    .mode-trigger { grid-template-columns: 1fr; }
+    h1 { font-size: 2.5rem; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <p class="label">Himeno Project — Character Document</p>
+    <h1>姫野</h1>
+    <p class="subtitle">Knell Lungs</p>
+  </header>
+
+  <div class="opening">
+    <p>
+      「僕の名前は姫野。<br>
+      3日前に日本人になったばかりだ。」
+    </p>
+    <p class="speaker">— 姫野、来日2日目</p>
+  </div>
+
+  <!-- 基本情報 -->
+  <div class="identity">
+    <div class="identity-item">
+      <p class="identity-key">Name</p>
+      <p class="identity-val">姫野 Knell Lungs</p>
+    </div>
+    <div class="identity-item">
+      <p class="identity-key">Reading</p>
+      <p class="identity-val">ネェル</p>
+    </div>
+    <div class="identity-item">
+      <p class="identity-key">本名</p>
+      <p class="identity-val redacted">不明</p>
+    </div>
+    <div class="identity-item">
+      <p class="identity-key">国籍</p>
+      <p class="identity-val redacted">不明</p>
+    </div>
+    <div class="identity-item">
+      <p class="identity-key">出身</p>
+      <p class="identity-val redacted">非公開</p>
+    </div>
+    <div class="identity-item">
+      <p class="identity-key">現在地</p>
+      <p class="identity-val">日本（来日3日目〜）</p>
+    </div>
+  </div>
+
+  <!-- 外見 -->
+  <section>
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2>外見と印象</h2>
+    </div>
+    <p>
+      細身の青年。スーツ姿を基本とし、<span class="key">赤い差し色</span>と<span class="key">金属装飾</span>が目を引く。十字のモチーフ、注射器といった小道具が象徴的に使われる。見た目だけを見ると、静かで上品な、洗練された危うさを持つ人物に映る。
+    </p>
+    <p>
+      ただし、外見の印象と中身には乖離がある。
+    </p>
+
+    <div class="appearance-grid">
+      <div class="appearance-item">
+        <p class="appearance-tag">体型</p>
+        <p class="appearance-desc">細身、スタイリッシュ</p>
+      </div>
+      <div class="appearance-item">
+        <p class="appearance-tag">服装</p>
+        <p class="appearance-desc">スーツ、赤い差し色</p>
+      </div>
+      <div class="appearance-item">
+        <p class="appearance-tag">装飾</p>
+        <p class="appearance-desc">金属アクセサリー、十字モチーフ</p>
+      </div>
+      <div class="appearance-item">
+        <p class="appearance-tag">小道具</p>
+        <p class="appearance-desc">注射器など</p>
+      </div>
+      <div class="appearance-item">
+        <p class="appearance-tag">タトゥー</p>
+        <p class="appearance-desc">あり（詳細非公開）</p>
+      </div>
+      <div class="appearance-item">
+        <p class="appearance-tag">作業時</p>
+        <p class="appearance-desc">アメピンで前髪を留める（実用）</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 性格 -->
+  <section>
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2>性格と話し方</h2>
+    </div>
+    <p>
+      子供っぽく、わがままで、自分の思い通りにならないと不機嫌になりやすい。難しい言葉や理屈っぽい表現は自然には使わない。<span class="key">いわゆる「アホ寄り」の幼さと素直さ</span>があり、その無邪気さが逆に不気味さを生む。
+    </p>
+    <p>
+      一人称は「僕」。口調は柔らかく、怒鳴るより普通の声量のままズレたことを言う方が姫野らしい。短く、素直で、少し幼く、妙にまっすぐ。
+    </p>
+
+    <div class="concept">
+      <p>
+        「え？　だって、こうする方がきれいでしょ」<br>
+        「大丈夫だよ。すぐ終わるから」<br>
+        「変なの。そんな顔するんだ」<br>
+        「だって手順だもん」
+      </p>
+    </div>
+  </section>
+
+  <!-- コンセプト -->
+  <section>
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2>コンセプト</h2>
+    </div>
+    <p>
+      姫野の中心コンセプトは<span class="key">「自分にだけ優しいシリアルキラー」</span>。
+    </p>
+    <p>
+      彼は自分が人を殺していることを完全に理解している。しかし、そこに一般的な意味での罪悪感はない。姫野は快楽殺人鬼というより<span class="key">「手順の実行者」</span>だ。重要なのは感情や動機ではなく、手順通りに進めること。殺す理由があるから殺すのではなく、手順通りに進めた結果として人が死ぬ。
+    </p>
+    <p>
+      姫野の怖さは、狂気が外見にわかりやすく出ていることではない。<span class="key">日常と異常が地続きであること</span>にある。生活の延長線上に異常がある。
+    </p>
+  </section>
+
+  <!-- 手順モード -->
+  <section>
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2>手順モード</h2>
+    </div>
+    <p>
+      姫野が人を殺すのは、「手順モード」が発動した時のみ。発動条件は怒りや恨みではない。
+    </p>
+
+    <div class="mode-trigger">
+      <div class="mode-item">景色</div>
+      <div class="mode-item">光</div>
+      <div class="mode-item">時間</div>
+      <div class="mode-item">静けさ</div>
+    </div>
+
+    <p>
+      これらが姫野の美意識と一致した瞬間に発動する。そこに偶然人がいて、その構図を「運命」と感じた時が開始条件だ。
+    </p>
+    <p>
+      手順モード中も、人格や口調は日常と大きく変わらない。普通に話し、普通に雑談する。ただし内容が少しズレている。被害者の恐怖や叫びは、感情移入の対象ではなく<span class="key">「反応データ」</span>として処理される。工程は絶対であり変更されない。妨害されると一瞬だけ低く冷たくなるが、それは怒りではなく<span class="key">「作業を邪魔された不機嫌さ」</span>だ。
+    </p>
+
+    <div class="note">
+      <p>通常、工程は3〜4分程度で完了する。死の確認は「終了フラグ」として処理され、感情的な余韻はほとんどない。終わると、すぐに日常へ戻る。</p>
+    </div>
+  </section>
+
+  <!-- 来歴 -->
+  <section>
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2>物語の起点</h2>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <p class="timeline-label">幼少期</p>
+        <p class="timeline-text">
+          台所用洗剤で庭の蟻を大量に殺した。褒められると思っていたが、叱られる。「勝手なやり方ではなく、正しい手順がある」と説明されたことを<span class="unknown">誤って学習</span>する。以後、善悪ではなく「正しい手順かどうか」が判断基準になる。
+        </p>
+      </div>
+      <div class="timeline-item">
+        <p class="timeline-label">出身地</p>
+        <p class="timeline-text">
+          <span class="unknown">非公開。</span>灰色の港、古いコンクリート、湿った鉄の匂い、冬が長い土地、というイメージだけが示されている。
+        </p>
+      </div>
+      <div class="timeline-item">
+        <p class="timeline-label">来日の経緯</p>
+        <p class="timeline-text">
+          故郷で日本人観光客と揉め、「手順通り」にやり返す。その人物の身分と名前を奪い、日本へ「帰国」として入り込む。ここで「姫野」という名前を得る。
+        </p>
+      </div>
+      <div class="timeline-item">
+        <p class="timeline-label">日本での日常</p>
+        <p class="timeline-text">
+          普通に優しく、人を対等に扱う青年として存在する。しかし景色や光や静けさに反応して「手順モード」が発動し、人を殺す。日常と異常は分離していない。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- このプロジェクトについて -->
+  <div class="participation">
+    <h3>このプロジェクトについて</h3>
+    <p>
+      姫野プロジェクトは、キャラクター「姫野」を中心に展開する共同創作企画です。物語はひとつの完結した説明として提示されるのではなく、断片的な台本・短編・動画・音声が重なって、少しずつ人物像が浮かび上がる構造をとっています。
+    </p>
+    <br>
+    <p>
+      「わかった」で終わるのではなく、「これはどういう意味だろう」で止まることが、正しい体験です。
+    </p>
+    <br>
+    <p>
+      イラスト、文章、音楽、映像、声など、表現形式を問わず参加を歓迎します。詳細は <a href="https://himenoprojects.carrd.co/" style="color: var(--gold-light); text-decoration: none;">himenoprojects.carrd.co</a> をご覧ください。
+    </p>
+  </div>
+
+  <footer>
+    <p>© Himeno Project — All Rights Reserved</p>
+  </footer>
+
+</div>
+</body>
+</html>
