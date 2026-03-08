@@ -12,7 +12,7 @@
     --surface: #111111;
     --border: #222222;
     --text: #c8c0b8;
-    --text-dim: #5a5550;
+    --text-dim: #8a8480;
     --red: #8b1a1a;
     --red-light: #c0392b;
     --gold: #6b5c3e;
@@ -31,7 +31,6 @@
     min-height: 100vh;
   }
 
-  /* grain overlay */
   body::before {
     content: '';
     position: fixed;
@@ -48,7 +47,6 @@
     padding: 0 2rem;
   }
 
-  /* header */
   header {
     padding: 5rem 0 3rem;
     border-bottom: 1px solid var(--border);
@@ -57,9 +55,9 @@
 
   .label {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.3em;
-    color: var(--text-dim);
+    font-size: 0.9rem;
+    letter-spacing: 0.2em;
+    color: #7a7470;
     text-transform: uppercase;
     margin-bottom: 1.5rem;
   }
@@ -82,7 +80,6 @@
     font-style: italic;
   }
 
-  /* opening quote */
   .opening {
     padding: 3rem 0;
     border-left: 1px solid var(--red);
@@ -91,9 +88,8 @@
   }
 
   .opening p {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem;
-    font-style: italic;
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1rem;
     color: var(--white);
     line-height: 2;
     font-weight: 300;
@@ -106,7 +102,6 @@
     color: var(--text-dim);
   }
 
-  /* identity block */
   .identity {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -120,13 +115,8 @@
     border-bottom: 1px solid var(--border);
   }
 
-  .identity-item:nth-child(odd) {
-    border-right: 1px solid var(--border);
-  }
-
-  .identity-item:nth-last-child(-n+2) {
-    border-bottom: none;
-  }
+  .identity-item:nth-child(odd) { border-right: 1px solid var(--border); }
+  .identity-item:nth-last-child(-n+2) { border-bottom: none; }
 
   .identity-key {
     font-size: 0.65rem;
@@ -143,19 +133,13 @@
   }
 
   .identity-val.redacted {
-    color: var(--text-dim);
+    color: #7a7470;
     font-style: italic;
   }
 
-  /* sections */
-  section {
-    margin-bottom: 4rem;
-  }
+  section { margin-bottom: 4rem; }
 
   .section-header {
-    display: flex;
-    align-items: baseline;
-    gap: 1rem;
     margin-bottom: 2rem;
     padding-bottom: 0.75rem;
     border-bottom: 1px solid var(--border);
@@ -163,9 +147,12 @@
 
   .section-num {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 0.7rem;
-    color: var(--red-light);
-    letter-spacing: 0.2em;
+    font-size: 2rem;
+    color: var(--red);
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 0.3rem;
+    opacity: 0.6;
   }
 
   h2 {
@@ -185,37 +172,45 @@
 
   p:last-child { margin-bottom: 0; }
 
-  /* keyword highlight */
-  .key {
-    color: var(--white);
-    font-weight: 300;
+  /* 赤線リスト */
+  .appearance-list {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
   }
 
-  /* appearance */
-  .appearance-grid {
+  .appearance-row {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1px;
-    background: var(--border);
-    margin-top: 1.5rem;
+    grid-template-columns: 5.5rem 1fr;
+    align-items: baseline;
+    padding: 0.9rem 0;
+    position: relative;
   }
 
-  .appearance-item {
-    background: var(--bg);
-    padding: 1.2rem 1.5rem;
+  .appearance-row::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(to right, var(--red), transparent 60%);
+    opacity: 0.35;
   }
 
-  .appearance-tag {
-    font-size: 0.65rem;
+  .appearance-row:last-child::after { display: none; }
+
+  .appearance-key {
+    font-size: 0.62rem;
     letter-spacing: 0.2em;
     color: var(--text-dim);
     text-transform: uppercase;
-    margin-bottom: 0.3rem;
   }
 
-  .appearance-desc {
+  .appearance-val {
     font-size: 0.85rem;
     color: var(--text);
+    line-height: 1.8;
   }
 
   /* timeline */
@@ -252,7 +247,7 @@
   }
 
   .timeline-label {
-    font-size: 0.65rem;
+    font-size: 0.78rem;
     letter-spacing: 0.2em;
     color: var(--red-light);
     text-transform: uppercase;
@@ -265,80 +260,6 @@
     line-height: 1.8;
   }
 
-  .timeline-text .unknown {
-    color: var(--text-dim);
-    font-style: italic;
-  }
-
-  /* note block */
-  .note {
-    background: var(--surface);
-    border-left: 2px solid var(--gold);
-    padding: 1.5rem 2rem;
-    margin-top: 2rem;
-  }
-
-  .note p {
-    font-size: 0.82rem;
-    color: var(--text-dim);
-    margin: 0;
-    font-style: italic;
-  }
-
-  /* concept block */
-  .concept {
-    background: var(--surface);
-    padding: 2.5rem;
-    margin: 2rem 0;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .concept::before {
-    content: '"';
-    position: absolute;
-    top: -1rem;
-    right: 1rem;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 8rem;
-    color: var(--border);
-    line-height: 1;
-    pointer-events: none;
-  }
-
-  .concept p {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.05rem;
-    font-style: italic;
-    line-height: 2;
-    color: var(--white);
-    position: relative;
-    z-index: 1;
-  }
-
-  /* mode block */
-  .mode-trigger {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1px;
-    background: var(--border);
-    margin: 1.5rem 0;
-  }
-
-  .mode-item {
-    background: var(--bg);
-    padding: 1rem 1.5rem;
-    font-size: 0.82rem;
-    color: var(--text-dim);
-    letter-spacing: 0.05em;
-  }
-
-  .mode-item::before {
-    content: '—  ';
-    color: var(--red);
-  }
-
-  /* participation section */
   .participation {
     border: 1px solid var(--border);
     padding: 2.5rem;
@@ -359,7 +280,6 @@
     color: var(--text-dim);
   }
 
-  /* footer */
   footer {
     padding: 4rem 0;
     border-top: 1px solid var(--border);
@@ -372,16 +292,12 @@
     letter-spacing: 0.15em;
   }
 
-  /* fade in */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(12px); }
     to   { opacity: 1; transform: translateY(0); }
   }
 
-  .container > * {
-    animation: fadeUp 0.8s ease both;
-  }
-
+  .container > * { animation: fadeUp 0.8s ease both; }
   header { animation-delay: 0s; }
   .opening { animation-delay: 0.15s; }
   .identity { animation-delay: 0.25s; }
@@ -396,19 +312,36 @@
     .identity-item:nth-child(odd) { border-right: none; }
     .identity-item:nth-last-child(-n+2) { border-bottom: 1px solid var(--border); }
     .identity-item:last-child { border-bottom: none; }
-    .appearance-grid { grid-template-columns: 1fr; }
-    .mode-trigger { grid-template-columns: 1fr; }
     h1 { font-size: 2.5rem; }
+    .appearance-row { grid-template-columns: 4.5rem 1fr; }
   }
 </style>
 </head>
 <body>
 <div class="container">
 
+  <!-- 免責 -->
+  <div style="
+    background: #0f0d0d;
+    padding: 2.5rem 2.5rem;
+    margin: 2rem 0 4rem;
+  ">
+    <p style="
+      font-size: 0.68rem;
+      color: #6a6460;
+      line-height: 2.2;
+      letter-spacing: 0.04em;
+    ">
+      「姫野プロジェクト」はフィクション作品です。作中に登場する人物、団体、事件、名称、思想、文化的要素はすべて創作表現であり、実在のものとは一切関係ありません。<br><br>
+      本作に含まれる暴力的、不穏、猟奇的、心理的恐怖を伴う表現は、あくまで作品演出および世界観表現を目的としたものであり、犯罪、暴力、差別、違法行為、特定思想を肯定・助長する意図はありません。<br><br>
+      本作は、現実の倫理や価値観をそのまま反映するものではなく、創作上の違和感、不穏さ、物語体験を重視したフィクションとして制作されています。また、異なる人種、信仰、信条、価値観を持つ人々からなる多様な文化的背景を持つチームによって制作されており、特定の思想、宗教、政治的立場を支持または否定する意図はありません。<br><br>
+      本作品の解釈は、視聴者・読者に委ねられています。
+    </p>
+  </div>
+
   <header>
     <p class="label">Himeno Project — Character Document</p>
     <h1>姫野</h1>
-    <p class="subtitle">Knell Lungs</p>
   </header>
 
   <div class="opening">
@@ -419,145 +352,121 @@
     <p class="speaker">— 姫野、来日2日目</p>
   </div>
 
-  <!-- 基本情報 -->
-  <div class="identity">
-    <div class="identity-item">
-      <p class="identity-key">Name</p>
-      <p class="identity-val">姫野 Knell Lungs</p>
+  <div class="appearance-list" style="margin-bottom: 4rem; margin-top: 0;">
+    <div class="appearance-row">
+      <span class="appearance-key">Name</span>
+      <span class="appearance-val" style="color: var(--white);">姫野・K・ラングス</span>
     </div>
-    <div class="identity-item">
-      <p class="identity-key">Reading</p>
-      <p class="identity-val">ネェル</p>
+    <div class="appearance-row">
+      <span class="appearance-key">表記</span>
+      <span class="appearance-val" style="color: var(--white);">Himeno, K. Lungs</span>
     </div>
-    <div class="identity-item">
-      <p class="identity-key">本名</p>
-      <p class="identity-val redacted">不明</p>
+    <div class="appearance-row">
+      <span class="appearance-key">本名</span>
+      <span class="appearance-val" style="color: #7a7470; font-style: italic;">不明</span>
     </div>
-    <div class="identity-item">
-      <p class="identity-key">国籍</p>
-      <p class="identity-val redacted">不明</p>
+    <div class="appearance-row">
+      <span class="appearance-key">国籍</span>
+      <span class="appearance-val" style="color: #7a7470; font-style: italic;">不明</span>
     </div>
-    <div class="identity-item">
-      <p class="identity-key">出身</p>
-      <p class="identity-val redacted">非公開</p>
+    <div class="appearance-row">
+      <span class="appearance-key">現在地</span>
+      <span class="appearance-val" style="color: var(--white);">日本</span>
     </div>
-    <div class="identity-item">
-      <p class="identity-key">現在地</p>
-      <p class="identity-val">日本（来日3日目〜）</p>
+    <div class="appearance-row">
+      <span class="appearance-key">出身</span>
+      <span class="appearance-val" style="color: #7a7470; font-style: italic;">非公開</span>
     </div>
   </div>
 
-  <!-- 外見 -->
+  <!-- 01 コンセプト -->
   <section>
     <div class="section-header">
       <span class="section-num">01</span>
-      <h2>外見と印象</h2>
+      <h2>コンセプト</h2>
     </div>
+    <p>自分にだけ優しいシリアルキラー。</p>
     <p>
-      細身の青年。スーツ姿を基本とし、<span class="key">赤い差し色</span>と<span class="key">金属装飾</span>が目を引く。十字のモチーフ、注射器といった小道具が象徴的に使われる。見た目だけを見ると、静かで上品な、洗練された危うさを持つ人物に映る。
+      日本に溶け込んでいる。本名も、国籍も、正体も、わからないまま。<br>
+      「姫野」という名前を、大層気に入っているようだ。
     </p>
-    <p>
-      ただし、外見の印象と中身には乖離がある。
-    </p>
-
-    <div class="appearance-grid">
-      <div class="appearance-item">
-        <p class="appearance-tag">体型</p>
-        <p class="appearance-desc">細身、スタイリッシュ</p>
-      </div>
-      <div class="appearance-item">
-        <p class="appearance-tag">服装</p>
-        <p class="appearance-desc">スーツ、赤い差し色</p>
-      </div>
-      <div class="appearance-item">
-        <p class="appearance-tag">装飾</p>
-        <p class="appearance-desc">金属アクセサリー、十字モチーフ</p>
-      </div>
-      <div class="appearance-item">
-        <p class="appearance-tag">小道具</p>
-        <p class="appearance-desc">注射器など</p>
-      </div>
-      <div class="appearance-item">
-        <p class="appearance-tag">タトゥー</p>
-        <p class="appearance-desc">あり（詳細非公開）</p>
-      </div>
-      <div class="appearance-item">
-        <p class="appearance-tag">作業時</p>
-        <p class="appearance-desc">アメピンで前髪を留める（実用）</p>
-      </div>
-    </div>
+    <p>画面越しのあなたにも、やさしくする。</p>
   </section>
 
-  <!-- 性格 -->
+  <!-- 02 外見 -->
   <section>
     <div class="section-header">
       <span class="section-num">02</span>
-      <h2>性格と話し方</h2>
+      <h2>外見と印象</h2>
     </div>
     <p>
-      子供っぽく、わがままで、自分の思い通りにならないと不機嫌になりやすい。難しい言葉や理屈っぽい表現は自然には使わない。<span class="key">いわゆる「アホ寄り」の幼さと素直さ</span>があり、その無邪気さが逆に不気味さを生む。
+      細身の青年。ベストスタイルのスーツを好み、ジャケットは着ない。見た目だけを見ると、静かで上品な、洗練された危うさを持つ人物に映る。ただし、外見の印象と中身には乖離がある。
     </p>
     <p>
-      一人称は「僕」。口調は柔らかく、怒鳴るより普通の声量のままズレたことを言う方が姫野らしい。短く、素直で、少し幼く、妙にまっすぐ。
+      スーツの下に隠れているが、スーツの佇まいとは似つかわしくない傷がある。幼少期の壮絶な環境が刻んだもの。
     </p>
 
-    <div class="concept">
-      <p>
-        「え？　だって、こうする方がきれいでしょ」<br>
-        「大丈夫だよ。すぐ終わるから」<br>
-        「変なの。そんな顔するんだ」<br>
-        「だって手順だもん」
-      </p>
+    <div class="appearance-list">
+      <div class="appearance-row">
+        <span class="appearance-key">服装</span>
+        <span class="appearance-val">ベストスタイルのスーツ。スラックスはアンクル丈。ショルダーホルスター。</span>
+      </div>
+      <div class="appearance-row">
+        <span class="appearance-key">装飾</span>
+        <span class="appearance-val">襟ピン、ウォレットチェーン、ピアス、イヤカフ。クロスのモチーフがあしらわれている。</span>
+      </div>
+      <div class="appearance-row">
+        <span class="appearance-key">装備</span>
+        <span class="appearance-val">変形注射器。女性名の愛称「カチューシャ」と呼び、可愛がっている。</span>
+      </div>
+      <div class="appearance-row">
+        <span class="appearance-key">髪</span>
+        <span class="appearance-val">紫。セルフカラー。地毛は赤茶。</span>
+      </div>
+      <div class="appearance-row">
+        <span class="appearance-key">目</span>
+        <span class="appearance-val">色素が濃い。光の入り方によって赤、ワインレッドに見える。左目の下に泣きボクロ。</span>
+      </div>
+      <div class="appearance-row">
+        <span class="appearance-key">タトゥー</span>
+        <span class="appearance-val">首にハートと悪魔の翼を組み合わせたタトゥー。</span>
+      </div>
+      <div class="appearance-row">
+        <span class="appearance-key">その他</span>
+        <span class="appearance-val">ヘビースモーカー。英語は話せるが母国語の訛りが強い。右手構え・左目照準、利き手と利き目が逆の構え方をする。</span>
+      </div>
     </div>
   </section>
 
-  <!-- コンセプト -->
+  <!-- 03 性格 -->
   <section>
     <div class="section-header">
       <span class="section-num">03</span>
-      <h2>コンセプト</h2>
+      <h2>性格と話し方</h2>
     </div>
     <p>
-      姫野の中心コンセプトは<span class="key">「自分にだけ優しいシリアルキラー」</span>。
-    </p>
-    <p>
-      彼は自分が人を殺していることを完全に理解している。しかし、そこに一般的な意味での罪悪感はない。姫野は快楽殺人鬼というより<span class="key">「手順の実行者」</span>だ。重要なのは感情や動機ではなく、手順通りに進めること。殺す理由があるから殺すのではなく、手順通りに進めた結果として人が死ぬ。
-    </p>
-    <p>
-      姫野の怖さは、狂気が外見にわかりやすく出ていることではない。<span class="key">日常と異常が地続きであること</span>にある。生活の延長線上に異常がある。
+      一人称は「僕」。二人称は「君」。口調は柔らかいがため口をきく。短く、妙にまっすぐ。見た目に反して子供っぽい面もあり、わがままで思い通りにならないと不機嫌になる。
     </p>
   </section>
 
-  <!-- 手順モード -->
+  <!-- 04 やり方 -->
   <section>
     <div class="section-header">
       <span class="section-num">04</span>
-      <h2>手順モード</h2>
+      <h2>やり方</h2>
     </div>
     <p>
-      姫野が人を殺すのは、「手順モード」が発動した時のみ。発動条件は怒りや恨みではない。
-    </p>
-
-    <div class="mode-trigger">
-      <div class="mode-item">景色</div>
-      <div class="mode-item">光</div>
-      <div class="mode-item">時間</div>
-      <div class="mode-item">静けさ</div>
-    </div>
-
-    <p>
-      これらが姫野の美意識と一致した瞬間に発動する。そこに偶然人がいて、その構図を「運命」と感じた時が開始条件だ。
+      姫野が人を殺すのは、決まって運命の人だ。美意識と一致した瞬間に発動する。例えばお気に入りの場所に偶然人がいて、それを「運命」と感じた時が開始条件だ。
     </p>
     <p>
-      手順モード中も、人格や口調は日常と大きく変わらない。普通に話し、普通に雑談する。ただし内容が少しズレている。被害者の恐怖や叫びは、感情移入の対象ではなく<span class="key">「反応データ」</span>として処理される。工程は絶対であり変更されない。妨害されると一瞬だけ低く冷たくなるが、それは怒りではなく<span class="key">「作業を邪魔された不機嫌さ」</span>だ。
+      その最中も、人格や口調は日常と大きく変わらない。普通に話し、普通に雑談する。ただし内容が少しズレている。被害者の恐怖や叫びは、感情移入の対象ではなく「反応データ」として処理される。工程は絶対であり、妨害されると一瞬だけ低く冷たくなるが、それは怒りではなく「作業を邪魔された不機嫌さ」だ。
     </p>
-
-    <div class="note">
-      <p>通常、工程は3〜4分程度で完了する。死の確認は「終了フラグ」として処理され、感情的な余韻はほとんどない。終わると、すぐに日常へ戻る。</p>
-    </div>
+    <p>
+      通常、工程は3〜4分程度で完了する。死の確認は「終了フラグ」として処理され、感情的な余韻はほとんどない。終わると、すぐに日常へ戻る。
+    </p>
   </section>
 
-  <!-- 来歴 -->
+  <!-- 05 物語の起点 -->
   <section>
     <div class="section-header">
       <span class="section-num">05</span>
@@ -568,44 +477,62 @@
       <div class="timeline-item">
         <p class="timeline-label">幼少期</p>
         <p class="timeline-text">
-          台所用洗剤で庭の蟻を大量に殺した。褒められると思っていたが、叱られる。「勝手なやり方ではなく、正しい手順がある」と説明されたことを<span class="unknown">誤って学習</span>する。以後、善悪ではなく「正しい手順かどうか」が判断基準になる。
+          姫野の異常性は、子どもの頃から完成していたわけではない。最初にあったのは残酷さそのものではなく、「理解のズレ」と「誤学習」だ。<br><br>
+          ある時、台所用洗剤を使って庭の蟻を大量に殺した。本人の感覚では、それは悪いことではなかった。むしろ褒められる可能性すらあると思っていた。しかし大人に叱られる。<br><br>
+          この時、姫野が受け取ったのは「命を粗末にしてはいけない」という倫理ではなかった。「大人が決めた常識には手順がある」「勝手なやり方ではだめだ」という形で説明されたことを、根本から誤って学習する。以後、「何をしたか」より「どの手順でやったか」を重視するようになる。<br><br>
+          幼少期の姫野は、露骨に暴力的な子どもではなかった。少しズレていて、本人は真面目なつもりなのに、受け取り方だけが決定的にずれている。少し可愛いのに、どこかひやっとする子どもだった。
+        </p>
+      </div>
+      <div class="timeline-item">
+        <p class="timeline-label">起点</p>
+        <p class="timeline-text">
+          故郷時代の重要人物。年上の女性。姫野にとって、手順や工程では処理しきれない、数少ない特別な相手だった。冷たく灰色の土地の中で、浮いていた姫野にただ優しくしてくれた人。「自分にだけ優しい」という姫野の性質は、ここが発端かもしれない。
         </p>
       </div>
       <div class="timeline-item">
         <p class="timeline-label">出身地</p>
         <p class="timeline-text">
-          <span class="unknown">非公開。</span>灰色の港、古いコンクリート、湿った鉄の匂い、冬が長い土地、というイメージだけが示されている。
+          非公開。北方ユーラシア、北太平洋沿岸域。灰色の港、古いコンクリート、湿った鉄の匂い、冬が長い土地。日本には近いようだ。
         </p>
       </div>
       <div class="timeline-item">
         <p class="timeline-label">来日の経緯</p>
         <p class="timeline-text">
-          故郷で日本人観光客と揉め、「手順通り」にやり返す。その人物の身分と名前を奪い、日本へ「帰国」として入り込む。ここで「姫野」という名前を得る。
+          故郷で日本人観光客と揉め、「手順通り」にやり返す。その人物の身分と名前を奪い、本人として日本へ「帰国」した。
         </p>
       </div>
       <div class="timeline-item">
         <p class="timeline-label">日本での日常</p>
         <p class="timeline-text">
-          普通に優しく、人を対等に扱う青年として存在する。しかし景色や光や静けさに反応して「手順モード」が発動し、人を殺す。日常と異常は分離していない。
+          優しく、人を対等に扱う青年として日常に存在する。気に入った相手にだけ、特別に優しい。しかし景色や光や静けさに反応して「やり方」が発動し、人を殺す。倫理という概念が、自分に適用されるとは思っていないようだ。
         </p>
       </div>
     </div>
   </section>
 
-  <!-- このプロジェクトについて -->
   <div class="participation">
     <h3>このプロジェクトについて</h3>
     <p>
-      姫野プロジェクトは、キャラクター「姫野」を中心に展開する共同創作企画です。物語はひとつの完結した説明として提示されるのではなく、断片的な台本・短編・動画・音声が重なって、少しずつ人物像が浮かび上がる構造をとっています。
+      姫野プロジェクトは、共同創作企画です。断片的な台本・短編・動画・音声が重なって、少しずつ人物像が浮かび上がる構造をとっています。都度異なるクリエイターたちが参加し、オムニバス形式で展開していきます。
     </p>
     <br>
     <p>
-      「わかった」で終わるのではなく、「これはどういう意味だろう」で止まることが、正しい体験です。
+      すべてがわかる必要はありません。「これはどういう意味だろう」で止まるくらいがちょうどいいです。
     </p>
     <br>
     <p>
       イラスト、文章、音楽、映像、声など、表現形式を問わず参加を歓迎します。詳細は <a href="https://himenoprojects.carrd.co/" style="color: var(--gold-light); text-decoration: none;">himenoprojects.carrd.co</a> をご覧ください。
     </p>
+    <br>
+    <p>
+      <a href="https://youtu.be/Tl4zfRacQKc" target="_blank" style="color: var(--text-dim); text-decoration: none; letter-spacing: 0.1em; font-size: 0.78rem;">▶ &nbsp;第一弾ボイスドラマを聴く</a>
+    </p>
+    <br>
+    <p>
+      <a href="https://youtu.be/z977UZUiti4" target="_blank" style="color: var(--text-dim); text-decoration: none; letter-spacing: 0.1em; font-size: 0.78rem;">▶ &nbsp;8年の話を聴く</a>
+    </p>
+    <br>
+    <iframe data-testid="embed-iframe" style="border-radius:4px; opacity: 0.85;" src="https://open.spotify.com/embed/episode/4SQe4npg4hS9CtULNlqHZv?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
   </div>
 
   <footer>
