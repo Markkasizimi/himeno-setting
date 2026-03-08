@@ -280,6 +280,28 @@
     color: var(--text-dim);
   }
 
+  .link-row {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    text-decoration: none;
+    letter-spacing: 0.15em;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .link-row::before {
+    content: '— ';
+    color: var(--red);
+    margin-right: 0.3rem;
+  }
+
+  .link-row:hover {
+    color: var(--white);
+    border-bottom-color: var(--border);
+  }
+
   footer {
     padding: 4rem 0;
     border-top: 1px solid var(--border);
@@ -523,17 +545,57 @@
     <p>
       イラスト、文章、音楽、映像、声など、表現形式を問わず参加を歓迎します。詳細は <a href="https://himenoprojects.carrd.co/" style="color: var(--gold-light); text-decoration: none;">himenoprojects.carrd.co</a> をご覧ください。
     </p>
-    <br>
-    <p>
-      <a href="https://youtu.be/Tl4zfRacQKc" target="_blank" style="color: var(--text-dim); text-decoration: none; letter-spacing: 0.1em; font-size: 0.78rem;">▶ &nbsp;第一弾ボイスドラマを聴く</a>
-    </p>
-    <br>
-    <p>
-      <a href="https://youtu.be/z977UZUiti4" target="_blank" style="color: var(--text-dim); text-decoration: none; letter-spacing: 0.1em; font-size: 0.78rem;">▶ &nbsp;8年の話を聴く</a>
-    </p>
-    <br>
-    <iframe data-testid="embed-iframe" style="border-radius:4px; opacity: 0.85;" src="https://open.spotify.com/embed/episode/4SQe4npg4hS9CtULNlqHZv?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
   </div>
+
+  <!-- リンク -->
+  <section style="margin-top: 4rem;">
+    <div class="section-header">
+      <span class="section-num" style="font-size: 1rem;">—</span>
+      <h2>リンク</h2>
+    </div>
+
+    <!-- 作品 -->
+    <p style="font-size: 0.65rem; letter-spacing: 0.25em; color: var(--text-dim); text-transform: uppercase; margin-bottom: 1rem;">作品</p>
+
+    <div style="display: flex; flex-direction: column; gap: 0.8rem; margin-bottom: 2rem;">
+      <!-- YouTube 第一弾 -->
+      <div style="position: relative; padding-top: 56.25%; border-radius: 4px; overflow: hidden; opacity: 0.85;">
+        <iframe src="https://www.youtube.com/embed/Tl4zfRacQKc" title="第一弾ボイスドラマ" style="position: absolute; inset: 0; width: 100%; height: 100%; border: none;" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <p style="font-size: 0.7rem; color: var(--text-dim); letter-spacing: 0.1em;">第一弾ボイスドラマ</p>
+
+      <!-- YouTube 8年の話 -->
+      <div style="position: relative; padding-top: 56.25%; border-radius: 4px; overflow: hidden; opacity: 0.85; margin-top: 1rem;">
+        <iframe src="https://www.youtube.com/embed/z977UZUiti4" title="8年の話" style="position: absolute; inset: 0; width: 100%; height: 100%; border: none;" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <p style="font-size: 0.7rem; color: var(--text-dim); letter-spacing: 0.1em;">8年の話</p>
+
+      <!-- YouTube ペインキラー -->
+      <div style="position: relative; padding-top: 56.25%; border-radius: 4px; overflow: hidden; opacity: 0.85; margin-top: 1rem;">
+        <iframe src="https://www.youtube.com/embed/_zC19Jpo8v0" title="オリジナル楽曲 ペインキラー" style="position: absolute; inset: 0; width: 100%; height: 100%; border: none;" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <p style="font-size: 0.7rem; color: var(--text-dim); letter-spacing: 0.1em;">オリジナル楽曲「ペインキラー」</p>
+
+      <!-- Spotify -->
+      <div style="margin-top: 1rem;">
+        <iframe style="border-radius: 4px; opacity: 0.85;" src="https://open.spotify.com/embed/episode/4SQe4npg4hS9CtULNlqHZv?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      </div>
+    </div>
+
+    <!-- SNS -->
+    <p style="font-size: 0.65rem; letter-spacing: 0.25em; color: var(--text-dim); text-transform: uppercase; margin-bottom: 1rem;">SNS / その他</p>
+
+    <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+      <a href="https://www.youtube.com/@HimenoKnellLungs" target="_blank" class="link-row">YouTube</a>
+      <a href="https://x.com/HimenoKLungs" target="_blank" class="link-row">X</a>
+      <a href="https://www.instagram.com/himenoklungs/" target="_blank" class="link-row">Instagram</a>
+      <a href="https://line.me/R/ti/p/@333loojg?oat_content=url&ts=11242139" target="_blank" class="link-row">LINE公式</a>
+      <a href="https://hub.vroid.com/characters/4633487228537015005/models/3931991445613676880" target="_blank" class="link-row">VRoid Hub</a>
+      <a href="https://markkawork.booth.pm/" target="_blank" class="link-row">BOOTH</a>
+      <a href="https://markkanen7s.shopselect.net/" target="_blank" class="link-row">BASE</a>
+      <a href="https://store.line.me/stickershop/product/28308147/ja" target="_blank" class="link-row">LINEスタンプ「入国スタンプ」</a>
+    </div>
+  </section>
 
   <footer>
     <p>© Himeno Project — All Rights Reserved</p>
